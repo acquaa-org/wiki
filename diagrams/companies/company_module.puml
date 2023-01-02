@@ -1,0 +1,17 @@
+@startuml Company Module
+
+[DCW Admin] .left.> [Company] : creates
+
+[DCW Admin] .down.> [Company Admin] : invites first
+
+[Company Admin] ..> [Company Admin] : invites
+
+[Company Admin] <..> [Plumber] : sends/approves \ninvitation
+[Company Admin] ..> [Plumber] : acts on \nbehalf of
+[Plumber] <..> [Company] : accepts/requests \ninvitation
+
+[DCW Admin] ..> [Test Kit] : add/edit/remove
+[Company Admin] ..> [Test Kit] : add/edit/remove
+[Plumber] .right.> [Test Kit] : uses
+
+@enduml

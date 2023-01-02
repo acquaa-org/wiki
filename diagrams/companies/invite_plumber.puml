@@ -1,0 +1,7 @@
+@startuml Invite Plumber
+
+"Company Admin" -> Plumber : invites
+Company -> Plumber : notifies
+Plumber --> Company : accepts invitation
+
+@enduml
