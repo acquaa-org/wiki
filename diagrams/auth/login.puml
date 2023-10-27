@@ -1,0 +1,23 @@
+@startuml Login
+participant WebClient #lightgreen
+participant Auth0 #orange
+participant IDP #cyan
+participant Acquaa #lightblue
+
+WebClient -> Auth0 : user logs in
+Auth0 -> IDP : redirect to IDP for authentication
+IDP --> Auth0 : authenticate user
+Auth0 --> WebClient : id token
+WebClient -> Acquaa : id token
+
+Acquaa -> Auth0 : validate id token
+Auth0 --> Acquaa : id token validated
+Acquaa --> WebClient : refresh token (stored in secure cookie)
+
+WebClient -> Acquaa : request access token (with refresh token)
+Acquaa --> WebClient : access token (with permissions explicitly specified)
+
+WebClient -> Acquaa : request resource (with access token)
+Acquaa --> WebClient : response
+
+@enduml

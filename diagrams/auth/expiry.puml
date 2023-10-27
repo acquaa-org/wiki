@@ -1,0 +1,11 @@
+@startuml Expiry
+participant WebClient #lightgreen
+participant Acquaa #lightblue
+
+WebClient -> Acquaa : request resource (with access token)
+Acquaa --> WebClient : response (HTTP 401)
+
+WebClient -> Acquaa : request access token (with refresh token)
+Acquaa --> WebClient : access token (with permissions explicitly specified)
+
+@enduml
