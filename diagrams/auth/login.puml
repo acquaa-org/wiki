@@ -7,11 +7,11 @@ participant Acquaa #lightblue
 WebClient -> Auth0 : user logs in
 Auth0 -> IDP : redirect to IDP for authentication
 IDP --> Auth0 : authenticate user
-Auth0 --> WebClient : id token
-WebClient -> Acquaa : id token
+Auth0 --> WebClient : authorization code
+WebClient -> Acquaa : authorization code
 
-Acquaa -> Auth0 : validate id token
-Auth0 --> Acquaa : id token validated
+Acquaa -> Auth0 : validate code
+Auth0 --> Acquaa : code validated
 Acquaa --> WebClient : refresh token (stored in secure cookie)
 
 WebClient -> Acquaa : request access token (with refresh token)
