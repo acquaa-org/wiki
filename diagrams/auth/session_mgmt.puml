@@ -1,0 +1,20 @@
+@startuml Post-Login
+participant WebClient #lightgreen
+participant CloudFront #orange
+participant Acquaa #lightblue
+
+WebClient -> Acquaa : user logs in
+Acquaa --> WebClient : refresh token (stored in secure cookie)
+
+WebClient -> Acquaa : request access token (with refresh token)
+Acquaa --> WebClient : access token (with permissions explicitly specified)
+
+WebClient -> Acquaa : request resource (with access token)
+CloudFront --> CloudFront : Check last access time against max idle time (401 on expiry)
+Acquaa --> WebClient : response
+
+WebClient -> Acquaa : Logout
+Acquaa --> Acquaa : revoke refresh token
+Acquaa --> WebClient : clear refresh token cookie
+
+@enduml
